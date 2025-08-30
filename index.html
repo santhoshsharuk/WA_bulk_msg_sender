@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Sender Pro - The Ultimate Automation Tool</title>
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <style>
+        /* --- Google Fonts Import --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        /* --- CSS Variables & Global Styles --- */
+        :root {
+            --primary-color: #25D366;
+            --secondary-color: #128C7E;
+            --background-color: #f0f2f5;
+            --surface-color: #ffffff;
+            --dark-color: #111b21;
+            --text-color: #333;
+            --text-light: #666;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; }
+        h3 { font-size: 1.5rem; }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--surface-color);
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--surface-color);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: var(--surface-color);
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            text-decoration: none;
+        }
+        
+        .navbar.scrolled .logo { color: var(--dark-color); }
+        .navbar:not(.scrolled) .logo { color: var(--surface-color); }
+
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .navbar:not(.scrolled) .nav-links a { color: var(--surface-color); }
+        .navbar.scrolled .nav-links a { color: var(--dark-color); }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(rgba(17, 27, 33, 0.7), rgba(17, 27, 33, 0.7)), url('https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            height: 100vh;
+            color: var(--surface-color);
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 850px;
+        }
+        
+        .hero h1 {
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* --- Features Section --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--surface-color);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            background: #e9fbf0;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* --- Use Cases Section --- */
+        #use-cases { background: var(--surface-color); }
+
+        .use-cases-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .use-cases-list li {
+            list-style: none;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .use-cases-list i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .use-cases-image img {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+        }
+        
+        /* --- Testimonials Section --- */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: var(--surface-color);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+        
+        .testimonial-card blockquote {
+            font-style: italic;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+        }
+
+        /* --- FAQ Section --- */
+        #faq { background: var(--surface-color); }
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #eee;
+        }
+        
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 20px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question::after {
+            content: '\f078'; /* Font Awesome down arrow */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active::after {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: var(--text-light);
+            padding: 0 10px;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            background: var(--dark-color);
+            color: var(--surface-color);
+            text-align: center;
+        }
+        
+        .cta-section h2 { margin-bottom: 30px; }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark-color);
+            color: #ccc;
+            padding: 60px 0 30px 0;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-socials a {
+            color: #ccc;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-socials a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+
+        /* --- Animation & Responsive --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .nav-links { display: none; } /* Simplified for mobile */
+            .use-cases-content { grid-template-columns: 1fr; }
+            .use-cases-image { order: -1; margin-bottom: 30px;}
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">SenderPro</a>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#use-cases">Use Cases</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="https://github.com/your-username/whatsapp-bulk-sender" target="_blank" class="btn btn-primary" style="padding: 8px 20px;">Download</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Automate Your WhatsApp Messaging</h1>
+            <p>Save time and connect personally with your audience by sending customized bulk messages directly from your computer. Simple, powerful, and open-source.</p>
+            <div class="hero-buttons">
+                <a href="https://github.com/your-username/whatsapp-bulk-sender" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+                <a href="#use-cases" class="btn btn-secondary">See Use Cases</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Features Section -->
+        <section id="features" class="container">
+            <h2 class="reveal">Why Choose This Tool?</h2>
+            <p class="section-subtitle reveal">Our script is built with simplicity and power in mind, offering features that make your messaging campaigns effective and easy to manage.</p>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Bulk Sending</h3>
+                    <p>Effortlessly send messages to hundreds of contacts from a single CSV file.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-highlighter"></i></div>
+                    <h3>Personalization</h3>
+                    <p>Use {name} placeholders to create unique, engaging messages for each contact.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon"><i class="fas fa-lock"></i></div>
+                    <h3>Session Persistence</h3>
+                    <p>Scan the QR code once. The script securely saves your session for future use.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Use Cases Section -->
+        <section id="use-cases">
+            <div class="container use-cases-content">
+                <div class="use-cases-text reveal">
+                    <h2>Perfect For...</h2>
+                    <p>This tool is ideal for anyone who needs to communicate with multiple people efficiently.</p>
+                    <ul class="use-cases-list">
+                        <li><i class="fas fa-check-circle"></i> Small businesses for customer notifications.</li>
+                        <li><i class="fas fa-check-circle"></i> Event organizers for sending reminders.</li>
+                        <li><i class="fas fa-check-circle"></i> Teachers and tutors for student updates.</li>
+                        <li><i class="fas fa-check-circle"></i> Community managers for group announcements.</li>
+                    </ul>
+                </div>
+                <div class="use-cases-image reveal">
+                    <img src="https://via.placeholder.com/500x400.png?text=Code+Snippet+Visualization" alt="Code visualization">
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="container">
+            <h2 class="reveal">Loved by Users</h2>
+            <p class="section-subtitle reveal">See what others are saying about the efficiency and simplicity of this tool.</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card reveal">
+                    <blockquote>"This script saved me hours of manual work. I can now send personalized reminders for my workshops in minutes. A real game-changer!"</blockquote>
+                    <p class="testimonial-author">- Sarah L., Event Organizer</p>
+                </div>
+                <div class="testimonial-card reveal">
+                    <blockquote>"As a small business owner, connecting with my customers is key. This tool lets me send promo updates with a personal touch. Highly recommend!"</blockquote>
+                    <p class="testimonial-author">- Mike R., Cafe Owner</p>
+                </div>
+                <div class="testimonial-card reveal">
+                    <blockquote>"Simple to set up and incredibly effective. The session saving feature is fantastic. I set it up once and it just works every time."</blockquote>
+                    <p class="testimonial-author">- David C., Community Manager</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq">
+            <div class="container faq-container">
+                <h2 class="reveal">Frequently Asked Questions</h2>
+                <div class="faq-item reveal">
+                    <button class="faq-question">Is this tool safe to use?</button>
+                    <div class="faq-answer">
+                        <p>Yes. The script runs locally on your machine and uses your own WhatsApp Web session. However, be aware that sending a large volume of messages may violate WhatsApp's terms of service. Use it responsibly.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">Do I need to be a programmer to use it?</button>
+                    <div class="faq-answer">
+                        <p>Basic computer skills are needed. You'll need to install Python, run a command in the terminal, and edit a text file (the CSV). The README file provides a step-by-step guide.</p>
+                    </div>
+                </div>
+                <div class="faq-item reveal">
+                    <button class="faq-question">Can I send images or attachments?</button>
+                    <div class="faq-answer">
+                        <p>This version of the script is designed for sending text messages only. Adding support for attachments is a possible future feature.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container reveal">
+                <h2>Ready to Start Automating?</h2>
+                <p>Download the script from GitHub for free and start sending personalized messages today.</p>
+                <a href="https://github.com/your-username/whatsapp-bulk-sender" target="_blank" class="btn btn-primary" style="margin-top: 20px;">
+                    <i class="fab fa-github"></i> Get it on GitHub
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>SenderPro</h3>
+                    <p>An open-source project for efficient and personalized WhatsApp messaging automation.</p>
+                    <div class="footer-socials">
+                        <!-- GitHub Link for the Project -->
+                        <a href="https://github.com/your-username/whatsapp-bulk-sender" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <!-- LinkedIn Link for the Developer -->
+                        <a href="https://in.linkedin.com/in/santhoshsharuk" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <!-- Instagram Link for the Developer -->
+                        <a href="https://www.instagram.com/santhosh_sharuk/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#use-cases">Use Cases</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p>For issues or suggestions, please open an issue on the project's GitHub repository.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                 <p>Developed with <i class="fas fa-heart" style="color: #e25555;"></i> by <a href="https://in.linkedin.com/in/santhoshsharuk" target="_blank" style="color: var(--primary-color); text-decoration: none;">Santhosh Sharuk</a>. Licensed under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Navbar Scroll Effect ---
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // --- FAQ Accordion ---
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    question.classList.toggle('active');
+                    if (question.classList.contains('active')) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        answer.style.maxHeight = 0;
+                    }
+                });
+            });
+
+            // --- Reveal on Scroll Animation ---
+            const revealElems = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElems.forEach(elem => observer.observe(elem));
+        });
+    </script>
+</body>
+</html>
