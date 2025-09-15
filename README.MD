@@ -91,9 +91,9 @@ Open the `contacts.csv` file and add the contacts you wish to message. The file 
 **Example `contacts.csv`:**
 ```csv
 Name,Number
-Shafeek,919360220928
-Sharuk,918110960489
-Maria,34600123123
+Shafeek,xxxxxxxxxx
+Sharuk,xxxxxxxxxx
+Maria,xxxxxxxxxx
 ```
 
 #### Step 2: Customize Your Message
